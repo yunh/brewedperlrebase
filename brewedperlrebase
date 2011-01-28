@@ -1,0 +1,66 @@
+#!/bin/sh
+
+#
+# brewedperlrebase: perlrebase for perlbrew
+#
+# Copyright (c) 2011,  Yu-ji Hosokawa <yu-ji@hoso.net>
+# This program is free software; you can redistribute it and/or modify
+# it under the same terms as Perl itself.
+#
+
+usage ()
+{
+    self=`basename $0`
+    echo "usage: $self [-t BREWED_PERL_TARGET] [-b BASE_ADDRESS] [-v]"
+    exit 1
+}
+
+cleanup ()
+{
+    rm -f $filelist
+}
+
+PATH=/bin
+baseaddr=0x57000000
+filelist=/tmp/brewedperlrebase.$$
+
+while getopts t:b:v opt "$@"
+do
+    case $opt in
+        t )
+            brew=$OPTARG;;
+        b )
+	    baseaddr=$OPTARG;;
+        v )
+            verbose=-v;;
+        * )
+	    usage
+            exit;;
+    esac
+done
+
+if [ -z $brew ]; then
+    #PATH=/bin:$PERLBREW_PATH
+    #brew=$( perlbrew list | perl -nale 'print $F[1] if m{\A\* (?!/)}' )
+    brew=$PERLBREW_PERL
+fi
+if [ -z $brew ]; then
+    echo "no brewed perl target specified."
+    usage
+    exit
+fi
+if [ ! -d $PERLBREW_ROOT/perls/$brew ]; then
+    echo "brewed perl target not found:" $brew
+    usage
+    exit
+fi
+
+echo "target: $brew"
+
+trap cleanup 1 2 3 15
+find $PERLBREW_ROOT/perls/$brew -name perl\*.exe -o -name \*.dll > $filelist
+cat $filelist | xargs chmod u+w 
+rebase $verbose -b $baseaddr -T $filelist
+cat $filelist | grep \.dll | peflags $verbose -d0 -T -
+# >/dev/null
+cleanup
