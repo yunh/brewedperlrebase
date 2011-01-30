@@ -1,3 +1,5 @@
+=pod
+
 =head1 NAME
 
 brewedperlrebase - rebase for brewed perl (perlrebase for perlbrew)
@@ -5,44 +7,39 @@ brewedperlrebase - rebase for brewed perl (perlrebase for perlbrew)
 
 =head1 SYNOPSIS
 
-=over
-
-=item $ brewedperlrebase [-t BREWED_PERL_TARGET] [-b BASE_ADDRESS] [-v] [-n]
-
- -t  specify the perlbrew Perl
- -b  base address
- -v  verbose output
- -n  no-act / dry run
+ brewedperlrebase [-t BREWED_PERL_TARGET] [-b BASE_ADDRESS] [-v] [-n]
+  -t  specify the perlbrew Perl
+  -b  base address
+  -v  verbose output
+  -n  no-act / dry run
 
 
-=item $ brewedperlrebase
+ $ brewedperlrebase
 
 rebases the perl binaries, which is used for current shell with perlbrew.
 Equivalent to C<brewedperlrebase -t $PERLBREW_PERL>.
 
 
-=item $ brewedperlrebase -t perl-5.10.1 -n
+ $ brewedperlrebase -t perl-5.10.1 -n
 
 shows a list of file which is to be rebased.
-
-=back
 
 
 =head1 DESCRIPTION
 
 C<brewedperlrebase> is a shell script which rebases C<perlbrew> Perl
-installation to make fork() function properly.
+installation to make C<fork()> function properly.
 
 
 =head1 SEE ALSO
 
-C</usr/share/doc/Cygwin/rebase-3.0.1.README>,
+F</usr/share/doc/Cygwin/rebase-3.0.1.README>,
 rebase(1), rebaseall(1), perlrebase(1).
 
 
 =head1 AUTHOR
 
-Yu-ji Hosokawa <http://u.hoso.net/>, <https://github.com/yunh>
+Yu-ji Hosokawa <L<http://u.hoso.net/>>, <L<https://github.com/yunh>>
 
 
 =head1 COPYRIGHT
@@ -78,3 +75,5 @@ RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
 FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
 SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF
 SUCH DAMAGES.
+
+=cut
