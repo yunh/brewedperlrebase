@@ -61,6 +61,11 @@ if [ ! -d $PERLBREW_ROOT/perls/$brew ]; then
     exit
 fi
 
+if [ ! \( -e /bin/rebase -a -e /bin/peflags \) ]; then
+    echo "rebase and peflags command, which comes from rebase package, are required to be installed."
+    usage
+fi
+
 echo "target: $brew"
 
 trap cleanup 1 2 3 15
