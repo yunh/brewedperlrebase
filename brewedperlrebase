@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #
-# brewedperlrebase - rebase for brewed perl (perlrebase for perlbrew)
+# brewedperlrebase - rebase for perlbrew Perl on Cygwin
 #
 # Copyright (c) 2011 Yu-ji Hosokawa
 # This program is free software; you can redistribute it and/or modify
@@ -51,12 +51,12 @@ if [ -z $brew ]; then
     brew=$PERLBREW_PERL
 fi
 if [ -z $brew ]; then
-    echo "no brewed perl target specified."
+    echo "no perlbrew Perl target specified."
     usage
     exit
 fi
 if [ ! -d $PERLBREW_ROOT/perls/$brew ]; then
-    echo "brewed perl target not found:" $brew
+    echo "perlbrew Perl target not found:" $brew
     usage
     exit
 fi
